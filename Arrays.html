@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <h2>JavaScript Operations On Arrays</h2>
+    <input id="EmpName" type="text" placeholder="Enter Emp Name" />  
+    <input type="button" value="Add Item" onclick="OnSubmit()"/> 
+    <input type="button" value="Remove Item" onclick="Remove()"/> 
+
+    <p id="demo"></p>
+    <p id="error"></p>
+
+    <script>
+      var EmpNames = ["kiran", "Ravi", "Pavan"];
+      var bindtext;
+      var errormsg;
+
+      bindtext = "<ul>";
+      for (i = 0; i < EmpNames.length; i++) 
+      {
+        bindtext += "<li>" + EmpNames[i] + "</li>";
+      }
+      bindtext += "</ul>";
+      document.getElementById("demo").innerHTML = bindtext;
+
+      function OnSubmit()
+      {
+        document.getElementById("error").innerHTML="";
+        var temp=document.getElementById("EmpName").value;
+        if(temp == "")
+        {
+          errormsg=temp +" Enter valid item!";
+          document.getElementById("error").innerHTML = errormsg;
+        }
+        else
+        {
+          var count=0;
+          for (i = 0; i < EmpNames.length; i++)
+          {  
+            if(EmpNames[i] ==temp)
+            {
+              count++;
+              break;
+            } 
+          }
+          if(count==0)
+          {
+            EmpNames.push(temp);
+          }
+          else
+          {
+            errormsg=" Duplicate values not allowed!";
+            document.getElementById("error").innerHTML = errormsg;
+          }
+          document.getElementById("demo").innerHTML = EmpNames;
+
+          bindtext = "<ul>";
+          for (i = 0; i < EmpNames.length; i++) 
+          {
+            bindtext += "<li>" + EmpNames[i] + "</li>";
+          }
+          bindtext += "</ul>";
+          document.getElementById("demo").innerHTML = bindtext;
+          document.getElementById("EmpName").value="";
+        }         
+      }
+
+      function Remove()
+      {
+        if(EmpNames.length == 0)
+        {
+          alert("No Items left");
+        }
+        else
+        {
+          EmpNames.pop();
+          bindtext = "<ul>";
+          for (i = 0; i < EmpNames.length; i++)
+          {
+            bindtext += "<li>" + EmpNames[i] + "</li>";
+          }
+          bindtext += "</ul>";
+          document.getElementById("demo").innerHTML = bindtext;
+        }
+      
+      }
+    </script>
+
+  </body>
+</html>
